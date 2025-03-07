@@ -21,4 +21,13 @@ def get_quote(update: Update, context: CallbackContext) -> None:
         update.message.reply_text(quote)
     except Exception as e:
         update.message.reply_text("Oops! Couldn't fetch a quote. Try again later.")
-        
+
+def main():
+    updater = Updater(TOKEN, use_context=True)
+    dp = updater.dispatcher
+
+    dp.add_handler(CommandHandler("start", start))
+    dp.add_handler(CommandHandler("quote", get_quote))
+
+    updater.start_polling()
+    updater.idel()
