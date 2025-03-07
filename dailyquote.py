@@ -31,3 +31,6 @@ def main():
 
     updater.start_polling()
     updater.idel()
+
+if __name__ == "__main__":
+    main()
