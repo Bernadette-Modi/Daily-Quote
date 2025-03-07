@@ -12,4 +12,13 @@ logger = logging.getLogger(__name__)
 
 def start(update: Update, context: CallbackContext) -> None:
     update.message.reply_text("Hey there! 💖 I'm your Quote Bot. Use /quote  to get a random quote!")
-    
+
+def get_quote(update: Update, context: CallbackContext) -> None:
+    try:
+        response = requests.get("https://api.quotable.io/random")
+        data = response.json()
+        quote = f"💬 {data['content']}\n-{data['author']}"
+        update.message.reply_text(quote)
+    except Exception as e:
+        update.message.reply_text("Oops! Couldn't fetch a quote. Try again later.")
+        
